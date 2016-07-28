@@ -49,7 +49,7 @@ PIXI.DisplayObjectContainer.prototype.constructor = PIXI.DisplayObjectContainer;
 Object.defineProperty(PIXI.DisplayObjectContainer.prototype, 'width', {
 
     get: function() {
-        return this.getLocalBounds().width;
+        return this.getLocalBounds().width * this.scale.x;
     },
 
     set: function(value) {
@@ -78,7 +78,7 @@ Object.defineProperty(PIXI.DisplayObjectContainer.prototype, 'width', {
 Object.defineProperty(PIXI.DisplayObjectContainer.prototype, 'height', {
 
     get: function() {
-        return this.getLocalBounds().height;
+        return this.getLocalBounds().height * this.scale.y;
     },
 
     set: function(value) {
@@ -470,14 +470,14 @@ PIXI.DisplayObjectContainer.prototype.getBounds = function(targetCoordinateSpace
 };
 
 /**
- * Retrieves the non-global local bounds of the displayObjectContainer as a rectangle. The calculation takes all visible children into consideration.
+ * Retrieves the non-global local bounds of the displayObjectContainer as a rectangle without any transformations. The calculation takes all visible children into consideration.
  *
  * @method getLocalBounds
  * @return {Rectangle} The rectangular bounding area
  */
 PIXI.DisplayObjectContainer.prototype.getLocalBounds = function()
 {
-    return this.getBounds(this.parent);
+    return this.getBounds(this);
 };
 
 /**
